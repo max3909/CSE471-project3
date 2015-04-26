@@ -94,6 +94,7 @@ namespace StepDX
             // Determine the last time
             stopwatch.Start();
             lastTime = stopwatch.ElapsedMilliseconds;
+
             AddObstacle(0, playingW, 0.9f, 1, Color.CornflowerBlue);
             AddObstacle(2, 3, 1.7f, 1.9f, Color.Crimson);
             AddObstacle(4, 4.2f, 1, 2.1f, Color.Coral);
@@ -101,8 +102,16 @@ namespace StepDX
             AddObstacle(5.5f, 6.5f, 3.2f, 3.4f, Color.PeachPuff);
             AddObstacle(6.5f, 7.5f, 2.5f, 2.7f, Color.Chocolate);
             AddPlatform(3.2f, 3.9f, 1.8f, 2, Color.CornflowerBlue);
+
             Texture texture = TextureLoader.FromFile(device, "../../../stone08.bmp");
             AddTexture(texture, 1.2f, 1.9f, 3.3f, 3.5f, Color.Transparent);
+            AddCoin(texture, 5, 1, 5.2f, 1, 5.1f, 1.2f);
+            AddCoin(texture, 2.5f, 1.9f, 2.7f, 1.9f, 2.6f, 2.1f);
+            AddCoin(texture, 4, 2.1f, 4.2f, 2.1f, 4.1f, 2.3f);
+            AddCoin(texture, 7.3f, 2.7f, 7.5f, 2.7f, 7.4f, 2.9f);
+            AddCoin(texture, 1.2f, 3.5f, 1.4f, 3.5f, 1.3f, 3.7f);
+            
+
             Texture spritetexture = TextureLoader.FromFile(device, "../../../guy8.bmp");
             player.Tex = spritetexture;
             player.AddVertex(new Vector2(-0.2f, 0));
@@ -339,6 +348,20 @@ namespace StepDX
             pt.AddTex(new Vector2(1, 1));
             pt.Color = color;
             world.Add(pt);
+        }
+
+        public void AddCoin(Texture tex, float leftX, float leftY, float rightX, float rightY, float centerX, float centerY)
+        {
+            PolygonTextured cn = new PolygonTextured();
+            cn.Tex = tex;
+            cn.AddVertex(new Vector2(centerX, centerY));
+            cn.AddTex(new Vector2(0.5f, 1));
+            cn.AddVertex(new Vector2(rightX, rightY));
+            cn.AddTex(new Vector2(1, 0));
+            cn.AddVertex(new Vector2(leftX, leftY));
+            cn.AddTex(new Vector2(0, 1));
+            cn.Color = Color.Gold;
+            world.Add(cn);
         }
 
     }
