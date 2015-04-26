@@ -73,6 +73,10 @@ namespace StepDX
         /// </summary>
         Collision collision = new Collision();
 
+        
+
+        GameSounds sounds;
+
         public Game()
         {
             InitializeComponent();
@@ -85,6 +89,8 @@ namespace StepDX
                                        CustomVertex.PositionColored.Format,
                                        Pool.Managed);
             background = new Background(device, playingW, playingH);
+
+            sounds = new GameSounds(this);
             // Determine the last time
             stopwatch.Start();
             lastTime = stopwatch.ElapsedMilliseconds;
@@ -218,6 +224,7 @@ namespace StepDX
                     v.Y = 7;
                     player.V = v;
                     player.A = new Vector2(0, -9.8f);
+                    sounds.Jump();
                 }
                
             }
@@ -285,10 +292,10 @@ namespace StepDX
                     }
                 }
 
-                if (player.P.X < 0.0f)
+                if (player.P.X < 0.4f)
                 {
                     Vector2 p = player.P;
-                    p.X = 0.0f;
+                    p.X = 0.4f;
                     player.P = p;
                 }
                 else if (player.P.X > playingW)
