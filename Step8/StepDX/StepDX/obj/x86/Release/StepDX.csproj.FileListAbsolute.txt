@@ -10,3 +10,9 @@ C:\Users\Owner\Documents\CSE471\Step8\StepDX\StepDX\obj\x86\Release\StepDX.cspro
 C:\Users\Owner\Source\Repos\CSE471-project32\Step8\StepDX\StepDX\bin\x86\Release\StepDX.exe.config
 C:\Users\Owner\Source\Repos\CSE471-project32\Step8\StepDX\StepDX\obj\x86\Release\StepDX.exe
 C:\Users\Owner\Source\Repos\CSE471-project32\Step8\StepDX\StepDX\obj\x86\Release\StepDX.pdb
+C:\Users\Owner\Source\Repos\CSE471-project32\Step8\StepDX\StepDX\bin\x86\Release\StepDX.exe
+C:\Users\Owner\Source\Repos\CSE471-project32\Step8\StepDX\StepDX\bin\x86\Release\StepDX.pdb
+C:\Users\Owner\Source\Repos\CSE471-project32\Step8\StepDX\StepDX\obj\x86\Release\StepDX.csprojResolveAssemblyReference.cache
+C:\Users\Owner\Source\Repos\CSE471-project32\Step8\StepDX\StepDX\obj\x86\Release\StepDX.Game.resources
+C:\Users\Owner\Source\Repos\CSE471-project32\Step8\StepDX\StepDX\obj\x86\Release\StepDX.Properties.Resources.resources
+C:\Users\Owner\Source\Repos\CSE471-project32\Step8\StepDX\StepDX\obj\x86\Release\StepDX.csproj.GenerateResource.Cache
