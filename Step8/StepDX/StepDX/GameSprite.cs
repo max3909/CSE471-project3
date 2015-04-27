@@ -27,6 +27,8 @@ namespace StepDX
         private float spriteTime = 0;
         private float spriteRate = 6;   // 6 per second
 
+        private float spriteScore = 0;  // Increases with collected tri
+
         public void SaveState()
         {
             pSave = p;
