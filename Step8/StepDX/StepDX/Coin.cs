@@ -7,5 +7,9 @@ namespace StepDX
 {
     public class Coin : PolygonTextured
     {
+        public void Delete()
+        {
+            verticesB.Clear();
+        }
     }
 }

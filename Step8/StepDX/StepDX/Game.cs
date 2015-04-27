@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.DirectX;
 using Microsoft.DirectX.Direct3D;
@@ -76,6 +75,7 @@ namespace StepDX
         
 
         GameSounds sounds;
+        List<Coin> coins = new List<Coin>();
 
         public Game()
         {
@@ -191,6 +191,11 @@ namespace StepDX
                 p.Render(device);
             }
 
+            foreach (Coin c in coins)
+            {
+                c.Render(device);
+            }
+
             player.Render(device);
 
             //End the scene
@@ -270,6 +275,9 @@ namespace StepDX
                 foreach (Polygon p in world)
                     p.Advance(step);
 
+                foreach (Coin c in coins)
+                    c.Advance(step);
+
                 foreach (Polygon p in world)
                 {
                     if (collision.Test(player, p))
@@ -289,6 +297,17 @@ namespace StepDX
                         }
                         player.V = v;
                         player.Advance(0);
+                    }
+                }
+
+                foreach (Coin c in coins)
+                {
+                    if (collision.Test(player, c))
+                    {
+                        sounds.Coin();
+                        c.Delete();
+                        coins.Remove(c);
+                        break;
                     }
                 }
 
@@ -361,7 +380,7 @@ namespace StepDX
             cn.AddVertex(new Vector2(leftX, leftY));
             cn.AddTex(new Vector2(0, 1));
             cn.Color = Color.Gold;
-            world.Add(cn);
+            coins.Add(cn);
         }
 
     }
