@@ -352,7 +352,7 @@ namespace StepDX
 
         public void AddCoin(Texture tex, float leftX, float leftY, float rightX, float rightY, float centerX, float centerY)
         {
-            PolygonTextured cn = new PolygonTextured();
+            Coin cn = new Coin();
             cn.Tex = tex;
             cn.AddVertex(new Vector2(centerX, centerY));
             cn.AddTex(new Vector2(0.5f, 1));
