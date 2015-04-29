@@ -27,7 +27,7 @@ namespace StepDX
         private float spriteTime = 0;
         private float spriteRate = 6;   // 6 per second
 
-        private float spriteScore = 0;  // Increases with collected tri
+        public int spriteScore = 0;  // Increases with collected tri
 
         public void SaveState()
         {
@@ -99,5 +99,7 @@ namespace StepDX
                 verticesM.Add(new Vector2(x.X + p.X, x.Y + p.Y));
             }
         }
+
+
     }
 }
