@@ -26,7 +26,7 @@ namespace StepDX
         /// <summary>
         /// Width of our playing area (meters)
         /// </summary>
-        private float playingW = 32;
+        private float playingW = 36;
 
         /// <summary>
         /// Vertex buffer for our drawing
@@ -105,11 +105,11 @@ namespace StepDX
 
             Texture texture = TextureLoader.FromFile(device, "../../../stone08.bmp");
             AddTexture(texture, 1.2f, 1.9f, 3.3f, 3.5f, Color.Transparent);
-            AddCoin(texture, 5, 1, 5.2f, 1, 5.1f, 1.2f);
-            AddCoin(texture, 2.5f, 1.9f, 2.7f, 1.9f, 2.6f, 2.1f);
-            AddCoin(texture, 4, 2.1f, 4.2f, 2.1f, 4.1f, 2.3f);
-            AddCoin(texture, 7.3f, 2.7f, 7.5f, 2.7f, 7.4f, 2.9f);
-            AddCoin(texture, 1.2f, 3.5f, 1.4f, 3.5f, 1.3f, 3.7f);
+            AddCoin("hexagon", texture, 5, 1, Color.Gold);
+            AddCoin("hexagon", texture, 2.5f, 1.9f, Color.HotPink);
+            AddCoin("triangle", texture, 4, 2.1f, Color.Chartreuse);
+            AddCoin("hexagon", texture, 7.3f, 2.7f, Color.Silver);
+            AddCoin("triangle", texture, 1.2f, 3.5f, Color.SandyBrown);
             
 
             Texture spritetexture = TextureLoader.FromFile(device, "../../../guy8.bmp");
@@ -197,6 +197,8 @@ namespace StepDX
             }
 
             player.Render(device);
+
+            DrawString();
 
             //End the scene
             device.EndScene();
@@ -305,6 +307,8 @@ namespace StepDX
                     if (collision.Test(player, c))
                     {
                         sounds.Coin();
+                        player.spriteScore += 100;
+                        DrawString();
                         c.Delete();
                         coins.Remove(c);
                         break;
@@ -326,8 +330,6 @@ namespace StepDX
 
                 delta -= step;
             }
-
-
 
         }
 
@@ -369,18 +371,54 @@ namespace StepDX
             world.Add(pt);
         }
 
-        public void AddCoin(Texture tex, float leftX, float leftY, float rightX, float rightY, float centerX, float centerY)
+        public void AddCoin(string shape, Texture tex, float leftX, float leftY, Color color)
         {
             Coin cn = new Coin();
             cn.Tex = tex;
-            cn.AddVertex(new Vector2(centerX, centerY));
-            cn.AddTex(new Vector2(0.5f, 1));
-            cn.AddVertex(new Vector2(rightX, rightY));
-            cn.AddTex(new Vector2(1, 0));
             cn.AddVertex(new Vector2(leftX, leftY));
-            cn.AddTex(new Vector2(0, 1));
-            cn.Color = Color.Gold;
+            cn.AddVertex(new Vector2(leftX + 0.2f, leftY));
+
+            if (shape == "triangle")
+            {
+                cn.AddVertex(new Vector2(leftX + 0.1f, leftY + 0.2f));
+                cn.AddTex(new Vector2(0.5f, 1));
+                cn.AddTex(new Vector2(1, 0));
+                cn.AddTex(new Vector2(0, 1));
+            }
+
+            if (shape == "hexagon")
+            {
+                cn.AddVertex(new Vector2(leftX + 0.3f, leftY + 0.1f));
+                cn.AddVertex(new Vector2(leftX + 0.2f, leftY + 0.2f));
+                cn.AddVertex(new Vector2(leftX, leftY + 0.2f));
+                cn.AddVertex(new Vector2(leftX - 0.1f, leftY + 0.1f));
+                cn.AddTex(new Vector2(0, 0.5f));
+                cn.AddTex(new Vector2(0.25f, 0));
+                cn.AddTex(new Vector2(0.75f, 0));
+                cn.AddTex(new Vector2(1, 0.5f));
+                cn.AddTex(new Vector2(0.75f, 1));
+                cn.AddTex(new Vector2(0.25f, 1));
+            }
+
+            cn.Color = color;
+
             coins.Add(cn);
+        }
+
+        public void DrawString()
+        {
+            System.Drawing.Graphics formGraphics = this.CreateGraphics();
+            string scoreString = player.spriteScore.ToString();
+            string drawString = "Score: " + scoreString;
+            System.Drawing.Font drawFont = new System.Drawing.Font("Arial", 16);
+            System.Drawing.SolidBrush drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
+            float x = 650.0F;
+            float y = 20.0F;
+            System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
+            formGraphics.DrawString(drawString, drawFont, drawBrush, x, y, drawFormat);
+            drawFont.Dispose();
+            drawBrush.Dispose();
+            formGraphics.Dispose();
         }
 
     }
