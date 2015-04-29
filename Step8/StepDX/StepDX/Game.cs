@@ -72,8 +72,6 @@ namespace StepDX
         /// </summary>
         Collision collision = new Collision();
 
-        
-
         GameSounds sounds;
         List<Coin> coins = new List<Coin>();
 
@@ -308,6 +306,14 @@ namespace StepDX
                     {
                         sounds.Coin();
                         player.spriteScore += 100;
+
+                        System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.White);
+                        System.Drawing.Graphics formGraphics;
+                        formGraphics = this.CreateGraphics();
+                        formGraphics.FillRectangle(myBrush, new Rectangle(650, 20, 200, 20));
+                        myBrush.Dispose();
+                        formGraphics.Dispose();
+
                         DrawString();
                         c.Delete();
                         coins.Remove(c);
